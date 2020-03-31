@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private Vector3 goal;
 
     [SerializeField]
-    private float speed = 5f;
+    private Customer customer;
 
     public Vector3 Goal { get => goal; set => goal = value; }
 
@@ -34,10 +34,33 @@ public class Player : MonoBehaviour
             {
                 Vector3 goalPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
                 GetPath(goalPosition);
-                Debug.Log(mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0)));
             }
             
         }
+        if(customer.GetCurrentState() != 1 && path == null)
+        {
+            GetPath(customer.GetNextStop());
+        }
+        /*
+        if(customer.GetCurrentState() == 0 && path == null && transform.parent.position != PositionsObjects.Cashier) { 
+            //ir al cajero
+            GetPath(PositionsObjects.Cashier);
+        }if (customer.GetCurrentState() == 1)
+        {
+            Debug.Log("Ordering");
+        }if(customer.GetCurrentState() == 2 && path == null && transform.parent.position != customer.GetNextStop())
+        {
+            GetPath(customer.GetNextStop());
+        }if(customer.GetCurrentState() == 3)
+        {
+            Debug.Log("Waiting");
+        }
+        */
+        /*
+            else if (customer.HasOrdered && path == null)
+            {
+                //encontrar una silla
+            }*/
         ClickToMove();
     }
 
@@ -55,7 +78,7 @@ public class Player : MonoBehaviour
     {
         if (path != null)
         {
-            transform.parent.position = Vector2.MoveTowards(transform.parent.position, destination, speed * Time.deltaTime);
+            transform.parent.position = Vector2.MoveTowards(transform.parent.position, destination, customer.SpeedMovement * Time.deltaTime);
             float distance = Vector2.Distance(destination, transform.parent.position);
             if (distance <= 0f)
             {
