@@ -65,7 +65,7 @@ public class Astar : MonoBehaviour
         Debug.Log(goal.x + " " + goal.y);
         Debug.Log(tileMap.WorldToLocal(new Vector3Int((int)goal.x, (int)goal.y, (int)0)));
         */
-
+        
         goalPos = new Vector3Int((int)Math.Round(goal.x), (int)Math.Round(goal.y), 0);
         startPos = new Vector3Int((int)Math.Round(start.x),(int)Math.Round(start.y),0);
 

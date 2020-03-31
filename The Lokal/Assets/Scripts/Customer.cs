@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,7 +39,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     private void Awake()
     {
-        startPosition = transform.parent.position;
+        startPosition = new Vector3((int)Math.Round(transform.parent.position.x), (int)Math.Round(transform.parent.position.y), 0);
     }
     // Start is called before the first frame update
     void FixedUpdate()

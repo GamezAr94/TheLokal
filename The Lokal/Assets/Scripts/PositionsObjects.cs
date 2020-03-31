@@ -21,6 +21,7 @@ public class PositionsObjects : MonoBehaviour
         cashier = GameObject.Find("cashierPosition").transform.position;
 
         ChairsArrayList = GameObject.FindGameObjectsWithTag("Chair");
+        Debug.Log(chairsArrayList.Length);
         
     }
 
@@ -40,7 +41,6 @@ public class PositionsObjects : MonoBehaviour
             else
             {
                 i++;
-                Debug.Log("the script is null");
                 //agregar que camine aleatoriamente porque no haylugares
             }
         }

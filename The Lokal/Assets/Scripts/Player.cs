@@ -28,40 +28,10 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero,Mathf.Infinity,ground);
-            if (hit.collider!= null)
-            {
-                Vector3 goalPosition = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
-                GetPath(goalPosition);
-            }
-            
-        }
         if(customer.IsWalking && path == null)
         {
             GetPath(customer.GetNextStop());
         }
-        /*
-        if(customer.GetCurrentState() == 0 && path == null && transform.parent.position != PositionsObjects.Cashier) { 
-            //ir al cajero
-            GetPath(PositionsObjects.Cashier);
-        }if (customer.GetCurrentState() == 1)
-        {
-            Debug.Log("Ordering");
-        }if(customer.GetCurrentState() == 2 && path == null && transform.parent.position != customer.GetNextStop())
-        {
-            GetPath(customer.GetNextStop());
-        }if(customer.GetCurrentState() == 3)
-        {
-            Debug.Log("Waiting");
-        }
-        */
-        /*
-            else if (customer.HasOrdered && path == null)
-            {
-                //encontrar una silla
-            }*/
         ClickToMove();
     }
 
