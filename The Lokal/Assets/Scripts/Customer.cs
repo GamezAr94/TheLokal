@@ -14,35 +14,47 @@ public class Customer : MonoBehaviour, CustomerBehavior
     [SerializeField]
     private Vector2 nextStop;
 
-    private bool ordering;
 
     public bool hasOrdered;
+    public bool isBored;
 
-    private float timeOrdering = 3;
+    private float timeWaiting = 0;
 
+    [SerializeField]
+    private PositionsObjects emptyChair;
 
-
+    private Vector3 startPosition;
 
     public float SpeedMovement { get => speed; }
     public Order WhatOrder { get => whatOrder; set => whatOrder = value; }
     public Vector2 NextStop { get => nextStop; set => nextStop = value; }
-    public bool Ordering { get => ordering; set => ordering = value; }
-    public float TimeOrdering { get => timeOrdering; set => timeOrdering = value; }
+    public float TimeWaiting { get => timeWaiting; set => timeWaiting = value; }
 
-    private Vector3 spotPosition;
-    private void Start()
+    private bool isSitting = false;
+
+    private Vector3 chairSpot;
+
+    private void Awake()
     {
-        spotPosition = PositionsObjects.Chairs[Random.Range(0, PositionsObjects.Chairs.Length - 1)].transform.position;
-        Debug.Log(spotPosition );
+        startPosition = transform.parent.position;
     }
     // Start is called before the first frame update
     void FixedUpdate()
     {
         if(GetCurrentState() == 1 && !hasOrdered){
-            TimeOrdering -= Time.fixedDeltaTime;
-            if(TimeOrdering <= 0)
+            timeWaiting += Time.fixedDeltaTime;
+            if(timeWaiting >= 5)
             {
                 hasOrdered = true;
+                TimeWaiting = 0;
+            }
+        }else if(GetCurrentState() == 3)
+        {
+            timeWaiting += Time.fixedDeltaTime;
+            if (timeWaiting >= 5)
+            {
+                isBored = true;
+                TimeWaiting = 0;
             }
         }
     }
@@ -54,11 +66,29 @@ public class Customer : MonoBehaviour, CustomerBehavior
             return PositionsObjects.Cashier;
         }else if(GetCurrentState() == 2)
         {
-            return spotPosition;
+            GameObject availableChair = emptyChair.GetAvailableChair();
+            if (availableChair != null)
+            {
+                Debug.Log("spot position: " + availableChair.transform.position);
+                isSitting = true;
+                chairSpot = availableChair.transform.position;
+                return availableChair.transform.position;
+            }
+            else
+            {
+                //what to do if its empty;
+                Debug.Log("NADA");
+                return new Vector3(0, 0, 0);
+            }
+        }else if (GetCurrentState() == 5)
+        {
+            return startPosition;
         }
+        Debug.Log("NADAx2");
 
         return new Vector3(0,0,0);
     }
+
 
     public int GetCurrentState()
     {
@@ -70,13 +100,21 @@ public class Customer : MonoBehaviour, CustomerBehavior
         {
             return (int)CurrentState.Ordering;
         }
-        else if (hasOrdered /* y aun no esta en la posicion de su silla*/)
+        else if (hasOrdered && isSitting == false)
         {
             return (int)CurrentState.FindingSpot;
         }
-        else if (hasOrdered && transform.parent.position == GetNextStop())
+        else if (hasOrdered && isSitting == true)
         {
-            return (int)CurrentState.Waiting;
+            if (chairSpot == transform.parent.position && !isBored)
+            {
+                return (int)CurrentState.Waiting;
+            }
+        }
+        else if (isBored)
+        {
+            Debug.Log("Se aburrio");
+            return (int)CurrentState.Going;
         }/*
         Cuando este en la posision de su silla esperando la orden esperando
 

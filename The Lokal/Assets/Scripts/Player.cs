@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Customer customer;
 
+
     public Vector3 Goal { get => goal; set => goal = value; }
 
     public void FixedUpdate()
@@ -37,7 +38,7 @@ public class Player : MonoBehaviour
             }
             
         }
-        if(customer.GetCurrentState() != 1 && path == null)
+        if(customer.GetCurrentState() != 1 && customer.GetCurrentState() != 3 && path == null)
         {
             GetPath(customer.GetNextStop());
         }
@@ -66,11 +67,14 @@ public class Player : MonoBehaviour
 
     public void GetPath(Vector3 goal)
     {
-        path = astar.Algorithm(transform.parent.position, goal);
-        if (path.Count > 0)
+        if (goal != transform.parent.position)
         {
-            destination = path.Pop();
-            this.Goal = goal;
+            path = astar.Algorithm(transform.parent.position, goal);
+            if (path.Count > 0)
+            {
+                destination = path.Pop();
+                this.Goal = goal;
+            }
         }
     }
 
