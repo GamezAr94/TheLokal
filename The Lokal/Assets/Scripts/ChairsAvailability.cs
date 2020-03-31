@@ -19,7 +19,6 @@ public class ChairsAvailability : MonoBehaviour
     public void ActualPositionChair()
     {
         ThisPosition = this.transform.position;
-        Debug.Log(this.transform.position);
     }
 
     public void setAvailable()

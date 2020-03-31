@@ -119,11 +119,11 @@ public class Customer : MonoBehaviour, CustomerBehavior
             //agregar una condicion si ya tiene comida 
         }
         else if (isBored)
-        {/*
+        {
             if(transform.parent.position == startPosition)
             {
                 DestroyItself();
-            }*/
+            }
             isWalking = true;
             return (int)CurrentState.Going;
         }/*
