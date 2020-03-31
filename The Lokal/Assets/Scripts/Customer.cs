@@ -17,6 +17,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     public bool hasOrdered;
     public bool isBored;
+    private bool isWalking;
 
     private float timeWaiting = 0;
 
@@ -29,6 +30,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
     public Order WhatOrder { get => whatOrder; set => whatOrder = value; }
     public Vector2 NextStop { get => nextStop; set => nextStop = value; }
     public float TimeWaiting { get => timeWaiting; set => timeWaiting = value; }
+    public bool IsWalking { get => isWalking; }
 
     private bool isSitting = false;
 
@@ -51,6 +53,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
         }else if(GetCurrentState() == 3)
         {
             timeWaiting += Time.fixedDeltaTime;
+            //añadir a la condicion si aun no tiene comida 
             if (timeWaiting >= 5)
             {
                 isBored = true;
@@ -69,7 +72,6 @@ public class Customer : MonoBehaviour, CustomerBehavior
             GameObject availableChair = emptyChair.GetAvailableChair();
             if (availableChair != null)
             {
-                Debug.Log("spot position: " + availableChair.transform.position);
                 isSitting = true;
                 chairSpot = availableChair.transform.position;
                 return availableChair.transform.position;
@@ -80,13 +82,12 @@ public class Customer : MonoBehaviour, CustomerBehavior
                 Debug.Log("NADA");
                 return new Vector3(0, 0, 0);
             }
-        }else if (GetCurrentState() == 5)
+        } 
+        else if (GetCurrentState() == 5)
         {
             return startPosition;
         }
-        Debug.Log("NADAx2");
-
-        return new Vector3(0,0,0);
+        return new Vector3(0, 0, 0);
     }
 
 
@@ -94,26 +95,35 @@ public class Customer : MonoBehaviour, CustomerBehavior
     {
         if (transform.parent.position != PositionsObjects.Cashier && !hasOrdered)
         {
+            isWalking = true;
             return (int)CurrentState.Comming;
         }
         else if (transform.parent.position == PositionsObjects.Cashier && !hasOrdered)
         {
+            isWalking = false;
             return (int)CurrentState.Ordering;
         }
         else if (hasOrdered && isSitting == false)
         {
+            isWalking = true;
             return (int)CurrentState.FindingSpot;
         }
-        else if (hasOrdered && isSitting == true)
+        else if (hasOrdered && isSitting == true && !isBored)
         {
-            if (chairSpot == transform.parent.position && !isBored)
+            if (chairSpot == transform.parent.position )
             {
+                isWalking = false;
                 return (int)CurrentState.Waiting;
             }
+            //agregar una condicion si ya tiene comida 
         }
         else if (isBored)
-        {
-            Debug.Log("Se aburrio");
+        {/*
+            if(transform.parent.position == startPosition)
+            {
+                DestroyItself();
+            }*/
+            isWalking = true;
             return (int)CurrentState.Going;
         }/*
         Cuando este en la posision de su silla esperando la orden esperando
@@ -126,5 +136,15 @@ public class Customer : MonoBehaviour, CustomerBehavior
         
          */
         return 7;
+    }
+
+    public void DestroyItself()
+    {
+        Destroy(transform.parent.gameObject);
+        Destroy(this);
+    }
+    public void setActiveWalikng()
+    {
+        isWalking=true?(isWalking=false):(isWalking = true);
     }
 }

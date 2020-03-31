@@ -35,7 +35,6 @@ public class PositionsObjects : MonoBehaviour
             {
                 chairScript.setAvailable();
                 findIt = true;
-                Debug.Log("Desde PositionObjects posicion silla " + chairsArrayList[i].transform.position);
                 return ChairsArrayList[i];
             }
             else

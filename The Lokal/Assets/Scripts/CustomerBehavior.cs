@@ -7,4 +7,6 @@ public interface CustomerBehavior
 {
     Vector3 GetNextStop();
     int GetCurrentState();
+
+    void DestroyItself();
 }

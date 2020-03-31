@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
             }
             
         }
-        if(customer.GetCurrentState() != 1 && customer.GetCurrentState() != 3 && path == null)
+        if(customer.IsWalking && path == null)
         {
             GetPath(customer.GetNextStop());
         }
