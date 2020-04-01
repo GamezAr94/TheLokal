@@ -29,7 +29,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     private bool isSitting = false;
 
-    private Vector3 chairSpot;
+    private GameObject chairSpot;
 
     private void Awake()
     {
@@ -65,12 +65,11 @@ public class Customer : MonoBehaviour, CustomerBehavior
             return PositionsObjects.Cashier;
         }else if(GetCurrentState() == 2)
         {
-            GameObject availableChair = emptyChair.GetAvailableChair();
-            if (availableChair != null)
+            chairSpot = emptyChair.GetAvailableChair();
+            if (chairSpot != null)
             {
                 isSitting = true;
-                chairSpot = availableChair.transform.position;
-                return availableChair.transform.position;
+                return chairSpot.transform.position;
             }
             else
             {
@@ -81,6 +80,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
         } 
         else if (GetCurrentState() == 5)
         {
+            chairSpot.GetComponent<ChairsAvailability>().setAvailable();
             return startPosition;
         }
         return new Vector3(0, 0, 0);
@@ -106,7 +106,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
         }
         else if (hasOrdered && isSitting == true && !isBored)
         {
-            if (chairSpot == transform.parent.position )
+            if (chairSpot.transform.position == transform.parent.position )
             {
                 isWalking = false;
                 return (int)CurrentState.Waiting;
@@ -143,4 +143,5 @@ public class Customer : MonoBehaviour, CustomerBehavior
     {
         isWalking=true?(isWalking=false):(isWalking = true);
     }
+
 }

@@ -980,6 +980,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 534140318}
+  - component: {fileID: 534140319}
   m_Layer: 0
   m_Name: cashierPosition
   m_TagString: Untagged
@@ -1001,6 +1002,18 @@ Transform:
   m_Father: {fileID: 2144430472}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &534140319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534140317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5023768562ed0e44ac38d81476fe4ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &551609321
 GameObject:
   m_ObjectHideFlags: 0
@@ -26299,7 +26312,6 @@ GameObject:
   - component: {fileID: 1965431917}
   - component: {fileID: 1965431919}
   - component: {fileID: 1965431918}
-  - component: {fileID: 1965431921}
   m_Layer: 0
   m_Name: Unwalkeable_Zones
   m_TagString: UnwalkableTilemap
@@ -30243,18 +30255,6 @@ Transform:
   m_Father: {fileID: 83291733}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1965431921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965431916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac2ec09a54a7b40489329f6321bfa134, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2025883803
 GameObject:
   m_ObjectHideFlags: 0
