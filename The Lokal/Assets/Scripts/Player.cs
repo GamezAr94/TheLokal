@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
@@ -31,6 +29,7 @@ public class Player : MonoBehaviour
     {
         if(customer.IsWalking && path == null)
         {
+            Debug.Log("GOING!");
             GetPath(customer.GetNextStop());
         }
         ClickToMove();

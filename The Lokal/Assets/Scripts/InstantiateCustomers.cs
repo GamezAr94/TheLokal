@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class InstantiateCustomers : MonoBehaviour
 {
@@ -10,12 +8,13 @@ public class InstantiateCustomers : MonoBehaviour
     [SerializeField]
     private Vector3[] spawns = new Vector3[3];
     private int randomPosition;
+
     // Update is called once per frame
     void FixedUpdate()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            randomPosition = UnityEngine.Random.Range(0, 3);
+            randomPosition = Random.Range(0, 3);
             Instantiate(Customer, spawns[randomPosition], Quaternion.identity);
         }
     }

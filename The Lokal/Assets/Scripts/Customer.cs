@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Customer : MonoBehaviour, CustomerBehavior
@@ -36,6 +34,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
         emptyChair = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PositionsObjects>();
         startPosition = new Vector3((int)Math.Round(transform.parent.position.x), (int)Math.Round(transform.parent.position.y), 0);
     }
+    
     // Start is called before the first frame update
     void FixedUpdate()
     {
@@ -62,26 +61,15 @@ public class Customer : MonoBehaviour, CustomerBehavior
     {
         if(GetCurrentState() == 0)
         {
-            return PositionsObjects.Cashier;
-        }else if(GetCurrentState() == 2)
+            return ComingToCashier();
+        }
+        if(GetCurrentState() == 2)
         {
-            chairSpot = emptyChair.GetAvailableChair();
-            if (chairSpot != null)
-            {
-                isSitting = true;
-                return chairSpot.transform.position;
-            }
-            else
-            {
-                //what to do if its empty;
-                Debug.Log("NADA");
-                return new Vector3(0, 0, 0);
-            }
+            return FindingSpot();
         } 
-        else if (GetCurrentState() == 5)
+        if (GetCurrentState() == 5)
         {
-            chairSpot.GetComponent<ChairsAvailability>().setAvailable();
-            return startPosition;
+            return GoingHome();
         }
         Debug.Log("Posible Bug");
         return startPosition;
@@ -92,16 +80,25 @@ public class Customer : MonoBehaviour, CustomerBehavior
     {
         if (transform.parent.position != PositionsObjects.Cashier && !hasOrdered)
         {
-            isWalking = true;
-            return (int)CurrentState.Comming;
+            if (Cashier.IsTakingAnOrder == false)
+            {
+                isWalking = true;
+                return (int)CurrentState.Comming;
+            }
+            else
+            {
+                isWalking = false;
+            }
         }
         else if (transform.parent.position == PositionsObjects.Cashier && !hasOrdered)
         {
+            Cashier.IsTakingAnOrder = true;
             isWalking = false;
             return (int)CurrentState.Ordering;
         }
         else if (hasOrdered && isSitting == false)
         {
+            Cashier.IsTakingAnOrder = false;
             isWalking = true;
             return (int)CurrentState.FindingSpot;
         }
@@ -140,9 +137,31 @@ public class Customer : MonoBehaviour, CustomerBehavior
         Destroy(transform.parent.gameObject);
         Destroy(transform.gameObject);
     }
-    public void setActiveWalikng()
+
+    public Vector3 FindingSpot()
     {
-        isWalking=true?(isWalking=false):(isWalking = true);
+        chairSpot = emptyChair.GetAvailableChair();
+        if (chairSpot != null)
+        {
+            isSitting = true;
+            return chairSpot.transform.position;
+        }
+        else
+        {
+            //what to do if its empty;
+            Debug.Log("NADA");
+            return new Vector3(0, 0, 0);
+        }
     }
 
+    public Vector3 GoingHome()
+    {
+        chairSpot.GetComponent<ChairsAvailability>().setAvailable();
+        return startPosition;
+    }
+
+    public Vector3 ComingToCashier()
+    {
+        return PositionsObjects.Cashier;
+    }
 }
