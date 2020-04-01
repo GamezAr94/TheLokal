@@ -6,18 +6,16 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 
-public enum TileType { GROUND, EMPTY }
 public class Astar : MonoBehaviour
 {
     #region Unwalkables Tiles
+    /*
     [SerializeField]
     private Tilemap unwalkableTileMap;
+    */
 
     private List<Vector3Int> UnwalkablePositions;
     #endregion
-
-    [SerializeField]
-    private Tilemap tileMap;
 
     private Vector3Int startPos, goalPos;
 
@@ -31,11 +29,13 @@ public class Astar : MonoBehaviour
 
     private Dictionary<Vector3, Node> allNodes = new Dictionary<Vector3, Node>();
 
-    private List<Vector3Int> waterTiles = new List<Vector3Int>();
+    private List<Vector3Int> obstacleTiles = new List<Vector3Int>();
 
     public void Awake()
     {
-        GameObject[] water = GameObject.FindGameObjectsWithTag("water");
+        Tilemap unwalkableTileMap = GetingTileMaps.Unwalkable;
+
+        GameObject[] obstacle = GameObject.FindGameObjectsWithTag("Obstacles");
 
         #region Initializing List with Unwalkable positions
         UnwalkablePositions = new List<Vector3Int>();
@@ -50,10 +50,10 @@ public class Astar : MonoBehaviour
         }
         #endregion
 
-        for (int i = 0; i < water.Length; i++)
+        for (int i = 0; i < obstacle.Length; i++)
         {
-            Vector3Int waterPosition = new Vector3Int((int)water[i].transform.position.x, (int)water[i].transform.position.y, 0);
-            waterTiles.Add(waterPosition);
+            Vector3Int waterPosition = new Vector3Int((int)obstacle[i].transform.position.x, (int)obstacle[i].transform.position.y, 0);
+            obstacleTiles.Add(waterPosition);
         }
     }
     public Stack<Vector3> Algorithm(Vector3 start, Vector3 goal)
@@ -104,7 +104,7 @@ public class Astar : MonoBehaviour
                 Vector3Int neighborPos = new Vector3Int(parentPosition.x - x, parentPosition.y - y, parentPosition.z);
                 if (y != 0 || x != 0)
                 {
-                    if (neighborPos != startPos && !waterTiles.Contains(neighborPos) && !UnwalkablePositions.Contains(neighborPos))
+                    if (neighborPos != startPos && !obstacleTiles.Contains(neighborPos) && !UnwalkablePositions.Contains(neighborPos))
                     {
                         Node neighbor = GetNode(neighborPos);
                         neighbors.Add(neighbor);
@@ -208,7 +208,7 @@ public class Astar : MonoBehaviour
         Vector3Int first = new Vector3Int(current.Position.x + (direct.x * -1), current.Position.y, current.Position.z);
         Vector3Int second = new Vector3Int(current.Position.x, current.Position.y + (direct.y * -1), current.Position.z);
 
-        if (waterTiles.Contains(first) || waterTiles.Contains(second))
+        if (obstacleTiles.Contains(first) || obstacleTiles.Contains(second))
         {
             return false;
         }

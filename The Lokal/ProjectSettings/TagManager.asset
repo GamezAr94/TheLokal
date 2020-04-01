@@ -7,7 +7,9 @@ TagManager:
   - Chair
   - Walls
   - Tables
-  - water
+  - Obstacles
+  - UnwalkableTilemap
+  - GameManager
   layers:
   - Default
   - TransparentFX

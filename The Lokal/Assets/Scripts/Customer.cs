@@ -12,24 +12,18 @@ public class Customer : MonoBehaviour, CustomerBehavior
     [SerializeField]
     private Order whatOrder;
 
-    [SerializeField]
-    private Vector2 nextStop;
-
-
     public bool hasOrdered;
     public bool isBored;
     private bool isWalking;
 
     private float timeWaiting = 0;
 
-    [SerializeField]
     private PositionsObjects emptyChair;
 
     private Vector3 startPosition;
 
     public float SpeedMovement { get => speed; }
     public Order WhatOrder { get => whatOrder; set => whatOrder = value; }
-    public Vector2 NextStop { get => nextStop; set => nextStop = value; }
     public float TimeWaiting { get => timeWaiting; set => timeWaiting = value; }
     public bool IsWalking { get => isWalking; }
 
@@ -39,6 +33,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     private void Awake()
     {
+        emptyChair = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PositionsObjects>();
         startPosition = new Vector3((int)Math.Round(transform.parent.position.x), (int)Math.Round(transform.parent.position.y), 0);
     }
     // Start is called before the first frame update
@@ -142,7 +137,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
     public void DestroyItself()
     {
         Destroy(transform.parent.gameObject);
-        Destroy(this);
+        Destroy(transform.gameObject);
     }
     public void setActiveWalikng()
     {

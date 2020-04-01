@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PositionsObjects : MonoBehaviour
 {
@@ -8,11 +9,8 @@ public class PositionsObjects : MonoBehaviour
     private static Vector3 cashier;
     public static Vector3 Cashier { get => cashier; }
 
-
     private static GameObject[] chairsArrayList = new GameObject[10];
     public static GameObject[] ChairsArrayList { get => chairsArrayList; set => chairsArrayList = value; }
-
-
 
 
     //Instantiate all the fields
@@ -21,6 +19,8 @@ public class PositionsObjects : MonoBehaviour
         cashier = GameObject.Find("cashierPosition").transform.position;
 
         ChairsArrayList = GameObject.FindGameObjectsWithTag("Chair");
+
+
         
     }
 

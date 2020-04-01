@@ -11,9 +11,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Camera mainCamera;
 
-    [SerializeField]
-    private LayerMask ground;
-
     private Stack<Vector3> path;
 
     private Vector3 destination;
@@ -25,7 +22,11 @@ public class Player : MonoBehaviour
 
 
     public Vector3 Goal { get => goal; set => goal = value; }
+    private void Awake()
+    {
+        mainCamera = Camera.main;
 
+    }
     public void FixedUpdate()
     {
         if(customer.IsWalking && path == null)
