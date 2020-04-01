@@ -81,9 +81,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   astar: {fileID: 1215467785600031024}
   mainCamera: {fileID: 0}
-  ground:
-    serializedVersion: 2
-    m_Bits: 256
   customer: {fileID: 1215467785600031030}
 --- !u!114 &1215467785600031024
 MonoBehaviour:
@@ -97,8 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a949707848b8e4a4ca22c5ad3bb3ebe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unwalkableTileMap: {fileID: 0}
-  tileMap: {fileID: 0}
 --- !u!212 &1215467785600031025
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -162,10 +157,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.31
   whatOrder: 0
-  nextStop: {x: 0, y: 0}
+  exits:
+  - {x: -10, y: -2, z: 0}
+  - {x: 10, y: -2, z: 0}
+  - {x: 3, y: 6, z: 0}
   hasOrdered: 0
   isBored: 0
-  emptyChair: {fileID: 0}
 --- !u!50 &1215467785600031031
 Rigidbody2D:
   serializedVersion: 4

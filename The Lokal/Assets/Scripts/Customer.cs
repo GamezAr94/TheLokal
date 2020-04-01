@@ -83,7 +83,8 @@ public class Customer : MonoBehaviour, CustomerBehavior
             chairSpot.GetComponent<ChairsAvailability>().setAvailable();
             return startPosition;
         }
-        return new Vector3(0, 0, 0);
+        Debug.Log("Posible Bug");
+        return startPosition;
     }
 
 
