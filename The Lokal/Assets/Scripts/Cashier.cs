@@ -18,6 +18,10 @@ public class Cashier : MonoBehaviour
     private void FixedUpdate()
     {
         CallingNextCustomer();
+        if (Input.GetMouseButtonDown(1))
+        {
+            Debug.Log(inLineCustomers.Count);
+        }
     }
     void CallingNextCustomer()
     {
@@ -28,7 +32,6 @@ public class Cashier : MonoBehaviour
                 if (!isTakingAnOrder && isNextInLine)
                 {
                     inLineCustomers[countingTheLine].GetComponent<Customer>().NextInLine = true;
-                    countingTheLine++;
                     isNextInLine = false;
                 }
             }

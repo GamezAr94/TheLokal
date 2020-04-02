@@ -99,7 +99,6 @@ public class Customer : MonoBehaviour, CustomerBehavior
         }
         else if (isBored)
         {
-                Debug.Log("DESTRUCTOR");
             if (transform.parent.position == startPosition)
             {
                 DestroyItself();
@@ -180,6 +179,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
             Cashier.IsTakingAnOrder = false;
             Debug.Log(Cashier.IsTakingAnOrder);
             hasOrdered = true;
+            Cashier.inLineCustomers.Remove(gameObject);
         }
     }
 
