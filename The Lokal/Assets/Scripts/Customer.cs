@@ -7,8 +7,6 @@ public class Customer : MonoBehaviour, CustomerBehavior
     [SerializeField]
     private float speed;
 
-    private int customerID = 0;
-
     [SerializeField]
     private Order whatOrder;
     private bool nextInLine = false;
@@ -188,7 +186,6 @@ public class Customer : MonoBehaviour, CustomerBehavior
     public void addingCustomersInLine()
     {
         Cashier.TotalCustomers++;
-        customerID = Cashier.TotalCustomers;
-        Cashier.inLineCustomers.Add(customerID, gameObject);
+        Cashier.inLineCustomers.Add(gameObject);
     }
 }
