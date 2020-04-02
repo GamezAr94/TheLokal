@@ -27,10 +27,40 @@ public class Player : MonoBehaviour
     }
     public void FixedUpdate()
     {
-        if(customer.IsWalking && path == null)
+        int currentCustomerState = customer.GetCurrentState();
+        switch (currentCustomerState)
         {
-            Debug.Log("GOING!");
-            GetPath(customer.GetNextStop());
+            case 0:
+                if (path == null)
+                {
+                    GetPath(customer.GetNextStop());
+                }
+                break;
+            case 1:
+                customer.Ordering();
+                break;
+            case 2:
+                if (!customer.FoundAChair)
+                {
+                    GetPath(customer.GetNextStop());
+                }
+                if (path == null)
+                {
+                    customer.IsSitting = true;
+                } 
+                break;
+            case 3:
+                customer.WaitingForFood();
+                break;
+            case 5:
+                if (path == null)
+                {
+                    GetPath(customer.GoingHome());
+                }
+                break;
+            default:
+                Debug.Log("ERRRRROOOOOOORRR! " + currentCustomerState.ToString());
+                break;
         }
         ClickToMove();
     }

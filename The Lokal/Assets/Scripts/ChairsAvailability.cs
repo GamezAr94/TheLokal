@@ -19,16 +19,5 @@ public class ChairsAvailability : MonoBehaviour
         ThisPosition = this.transform.position;
     }
 
-    public void setAvailable()
-    {
-        if (IsAvailable)
-        {
-            IsAvailable = false;
-        }
-        else
-        {
-            IsAvailable = true;
-        }
-    }
 
 }
