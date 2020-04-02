@@ -14,11 +14,13 @@ public class Customer : MonoBehaviour, CustomerBehavior
     public bool isBored;
     private bool foundAChair = false;
     private bool isSitting = false;
+    private bool isDoingALine = false;
 
     private float timeOrdering = 3f;
     private float timeWaiting = 3f;
 
-    private PositionsObjects emptyChair;
+    private PositionsObjects emptyChairsScript;
+    private GameObject chairSpot;
     private Vector3 startPosition;
 
     public float SpeedMovement { get => speed; }
@@ -28,11 +30,11 @@ public class Customer : MonoBehaviour, CustomerBehavior
     public bool IsSitting { get => isSitting; set => isSitting = value; }
     public float TimeOrdering { get => timeOrdering; set => timeOrdering = value; }
 
-    private GameObject chairSpot;
+    public bool IsDoingALine { get => isDoingALine;}
 
     private void Awake()
     {
-        emptyChair = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PositionsObjects>();
+        emptyChairsScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PositionsObjects>();
         startPosition = new Vector3((int)Math.Round(transform.parent.position.x), (int)Math.Round(transform.parent.position.y), 0);
     }
 
@@ -53,6 +55,10 @@ public class Customer : MonoBehaviour, CustomerBehavior
             Debug.Log("ADENTRO DEL STATE 5");
             return GoingHome();
         }
+        if(GetCurrentState() == 6)
+        {
+            return DoingALine();
+        }
         Debug.Log("Posible Bug");
         return startPosition;
     }
@@ -62,7 +68,14 @@ public class Customer : MonoBehaviour, CustomerBehavior
     {
         if (transform.parent.position != PositionsObjects.Cashier && !hasOrdered)
         {
-            return (int)CurrentState.Comming;
+            if (!Cashier.IsTakingAnOrder)
+            {
+                return (int)CurrentState.Comming;
+            }
+            else
+            {
+                return (int)CurrentState.Line;
+            }
         }
         else if (transform.parent.position == PositionsObjects.Cashier && !hasOrdered)
         {
@@ -101,6 +114,11 @@ public class Customer : MonoBehaviour, CustomerBehavior
         return 7;
     }
 
+    private Vector3 DoingALine()
+    {
+        isDoingALine = true;
+        return new Vector3(-1, 0, 0);
+    }
     public void WaitingForFood()
     {
         Debug.Log("ADENTRO DEL STATE 3");
@@ -120,7 +138,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     public Vector3 FindingSpot()
     {
-        chairSpot = emptyChair.GetAvailableChair();
+        chairSpot = emptyChairsScript.GetAvailableChair();
         if (chairSpot.GetComponent<ChairsAvailability>().IsAvailable && chairSpot != null)
         {
             foundAChair = true;
@@ -143,15 +161,20 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     public Vector3 ComingToCashier()
     {
+        isDoingALine = false;
         return PositionsObjects.Cashier;
     }
 
     public void Ordering()
     {
+        Cashier.IsTakingAnOrder = true;
         Debug.Log("ADENTRO DEL STATE 1");
         timeOrdering -= Time.fixedDeltaTime;
+        Debug.Log(Cashier.IsTakingAnOrder);
         if (timeOrdering <= 0)
         {
+            Cashier.IsTakingAnOrder = false;
+            Debug.Log(Cashier.IsTakingAnOrder);
             hasOrdered = true;
         }
     }

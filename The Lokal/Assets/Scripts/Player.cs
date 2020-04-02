@@ -58,6 +58,12 @@ public class Player : MonoBehaviour
                     GetPath(customer.GoingHome());
                 }
                 break;
+            case 6:
+                if (!customer.IsDoingALine)
+                {
+                    GetPath(customer.GetNextStop());
+                }
+                break;
             default:
                 Debug.Log("ERRRRROOOOOOORRR! " + currentCustomerState.ToString());
                 break;

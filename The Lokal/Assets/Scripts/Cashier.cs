@@ -7,5 +7,4 @@ public class Cashier : MonoBehaviour
     private static bool isTakingAnOrder = false;
 
     public static bool IsTakingAnOrder { get => isTakingAnOrder; set => isTakingAnOrder = value; }
-
 }
