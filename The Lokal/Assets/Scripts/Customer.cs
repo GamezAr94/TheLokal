@@ -7,8 +7,11 @@ public class Customer : MonoBehaviour, CustomerBehavior
     [SerializeField]
     private float speed;
 
+    private int customerID = 0;
+
     [SerializeField]
     private Order whatOrder;
+    private bool nextInLine = false;
 
     public bool hasOrdered = false;
     public bool isBored;
@@ -31,11 +34,13 @@ public class Customer : MonoBehaviour, CustomerBehavior
     public float TimeOrdering { get => timeOrdering; set => timeOrdering = value; }
 
     public bool IsDoingALine { get => isDoingALine;}
+    public bool NextInLine { get => nextInLine; set => nextInLine = value; }
 
     private void Awake()
     {
         emptyChairsScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PositionsObjects>();
         startPosition = new Vector3((int)Math.Round(transform.parent.position.x), (int)Math.Round(transform.parent.position.y), 0);
+        addingCustomersInLine();
     }
 
     public Vector3 GetNextStop()
@@ -57,6 +62,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
         }
         if(GetCurrentState() == 6)
         {
+            Debug.Log("ADENTRO DEL STATE 6");
             return DoingALine();
         }
         Debug.Log("Posible Bug");
@@ -68,7 +74,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
     {
         if (transform.parent.position != PositionsObjects.Cashier && !hasOrdered)
         {
-            if (!Cashier.IsTakingAnOrder)
+            if (nextInLine)
             {
                 return (int)CurrentState.Comming;
             }
@@ -177,5 +183,12 @@ public class Customer : MonoBehaviour, CustomerBehavior
             Debug.Log(Cashier.IsTakingAnOrder);
             hasOrdered = true;
         }
+    }
+
+    public void addingCustomersInLine()
+    {
+        Cashier.TotalCustomers++;
+        customerID = Cashier.TotalCustomers;
+        Cashier.inLineCustomers.Add(customerID, gameObject);
     }
 }
