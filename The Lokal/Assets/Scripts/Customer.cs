@@ -17,7 +17,9 @@ public class Customer : MonoBehaviour, CustomerBehavior
     private bool isSitting = false;
     private bool isDoingALine = false;
 
+    [SerializeField]
     private float timeOrdering = 3f;
+    [SerializeField]
     private float timeWaiting = 3f;
 
     private PositionsObjects emptyChairsScript;
