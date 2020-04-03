@@ -11,6 +11,8 @@ public class Customer : MonoBehaviour, CustomerBehavior
     private Order whatOrder;
     private bool nextInLine = false;
 
+    public bool LineInMotion = false;
+
     public bool hasOrdered = false;
     public bool isBored;
     private bool foundAChair = false;
@@ -67,13 +69,13 @@ public class Customer : MonoBehaviour, CustomerBehavior
             return DoingALine();
         }
         Debug.Log("Posible Bug");
-        return startPosition;
+        return ComingToCashier();
     }
 
 
     public int GetCurrentState()
     {
-        if (transform.parent.position != PositionsObjects.Cashier && !hasOrdered)
+        if (transform.parent.position != PositionsObjects.Cashier && !hasOrdered && !LineInMotion)
         {
             if (nextInLine)
             {
@@ -84,6 +86,12 @@ public class Customer : MonoBehaviour, CustomerBehavior
                 return (int)CurrentState.Line;
             }
         }
+
+        else if (LineInMotion)
+        {
+            return (int)CurrentState.MovingTheLine;
+        }
+
         else if (transform.parent.position == PositionsObjects.Cashier && !hasOrdered)
         {
             return (int)CurrentState.Ordering;
@@ -125,9 +133,23 @@ public class Customer : MonoBehaviour, CustomerBehavior
         return 7;
     }
 
-    private Vector3 DoingALine()
+    public void TheLineIsMoving()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f);
+        LineInMotion = false;
+    }
+
+    public Vector3 DoingALine()
     {
         isDoingALine = true;
+        LineInMotion = false;
+        for (int i = 0; i < GetingTileMaps.positionInLine.Count; i++)
+        {
+            if (Cashier.inLineCustomers[i + 1].Equals(gameObject))
+            {
+                return GetingTileMaps.positionInLine[i];
+            }
+        }
         return new Vector3(-1, 0, 0);
     }
     public void WaitingForFood()

@@ -12,10 +12,13 @@ public class InstantiateCustomers : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Cashier.inLineCustomers.Count < GetingTileMaps.positionInLine.Count-1 )
         {
-            randomPosition = Random.Range(0, 3);
-            Instantiate(Customer, spawns[randomPosition], Quaternion.identity);
+            for (int i = 0; i < 2; i++)
+            {
+                randomPosition = Random.Range(0, 3);
+                Instantiate(Customer, spawns[randomPosition], Quaternion.identity);
+            }
         }
     }
 }

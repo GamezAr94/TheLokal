@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class GetingTileMaps : MonoBehaviour
@@ -11,6 +12,8 @@ public class GetingTileMaps : MonoBehaviour
     public Tilemap[] TileMaps { get => tileMaps; set => tileMaps = value; }
     public static Tilemap Unwalkable { get => unwalkable; set => unwalkable = value; }
     public static Tilemap LineCashier { get => lineCashier; set => lineCashier = value; }
+
+    public static List<Vector3> positionInLine = new List<Vector3>();
 
     void Awake()
     {
@@ -35,7 +38,8 @@ public class GetingTileMaps : MonoBehaviour
             Vector3 positionTemp = LineCashier.CellToWorld(position);
             if (LineCashier.GetTile(position))
             {
-                Debug.Log("Posicion de la linea " + positionTemp);
+                positionInLine.Add(positionTemp);
+                Debug.Log("1");
             }
         }
         #endregion

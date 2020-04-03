@@ -11,7 +11,9 @@ public class Cashier : MonoBehaviour
 
     public static List<GameObject> inLineCustomers = new List<GameObject>();
 
-    public bool isNextInLine = true;
+    public static bool isNextInLine = true;
+
+    public static bool lineIsInMovement = false;
     
     private int countingTheLine = 0;
 
@@ -27,17 +29,24 @@ public class Cashier : MonoBehaviour
     {
         if (inLineCustomers.Count > 0)
         {
-            if (countingTheLine < inLineCustomers.Count)
+            if (!isTakingAnOrder && isNextInLine)
             {
-                if (!isTakingAnOrder && isNextInLine)
+                inLineCustomers[countingTheLine].GetComponent<Customer>().NextInLine = true;
+
+                //--------------------------------
+                for (int i = 0; i < GetingTileMaps.positionInLine.Count && i < inLineCustomers.Count-1; i++)
                 {
-                    inLineCustomers[countingTheLine].GetComponent<Customer>().NextInLine = true;
-                    isNextInLine = false;
+                    inLineCustomers[i+1].GetComponent<Customer>().LineInMotion = true;
                 }
+                //--------------------------------
+                inLineCustomers[0].GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f);
+
+                isNextInLine = false;
+                lineIsInMovement = true;
             }
             if(isTakingAnOrder && !isNextInLine)
             {
-                isNextInLine = true; 
+                isNextInLine = true;
             }
         }
     }

@@ -159,7 +159,7 @@ MonoBehaviour:
   whatOrder: 0
   hasOrdered: 0
   isBored: 0
-  timeOrdering: 1
+  timeOrdering: 5
   timeWaiting: 10
 --- !u!50 &1215467785600031031
 Rigidbody2D:

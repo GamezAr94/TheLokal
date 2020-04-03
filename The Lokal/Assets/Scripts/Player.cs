@@ -69,6 +69,13 @@ public class Player : MonoBehaviour
                     GetPath(customer.GetNextStop());
                 }
                 break;
+            case 7:
+                if (customer.LineInMotion)
+                {
+                    GetPath(customer.DoingALine());
+                    Cashier.lineIsInMovement = false;
+                }
+                break;
             default:
                 Debug.Log("ERRRRROOOOOOORRR! " + currentCustomerState.ToString());
                 break;
