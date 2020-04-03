@@ -30,6 +30,7 @@ public class PositionsObjects : MonoBehaviour
             ChairsAvailability chairScript = ChairsArrayList[i].GetComponent<ChairsAvailability>();
             if (ChairsArrayList[i] != null && chairScript != null && chairScript.IsAvailable == true)
             {
+                chairScript.IsAvailable = false;
                 findIt = true;
                 return ChairsArrayList[i];
             }

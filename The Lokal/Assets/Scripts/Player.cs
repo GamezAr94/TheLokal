@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Customer customer;
 
+    int currentCustomerState;
+
 
     public Vector3 Goal { get => goal; set => goal = value; }
     private void Awake()
@@ -25,9 +27,12 @@ public class Player : MonoBehaviour
         mainCamera = Camera.main;
 
     }
+    private void Update()
+    {
+        currentCustomerState = customer.GetCurrentState();
+    }
     public void FixedUpdate()
     {
-        int currentCustomerState = customer.GetCurrentState();
         switch (currentCustomerState)
         {
             case 0:
@@ -53,9 +58,9 @@ public class Player : MonoBehaviour
                 customer.WaitingForFood();
                 break;
             case 5:
-                if (path == null)
+                if (path == null && !customer.ChairSpot.GetComponent<ChairsAvailability>().IsAvailable)
                 {
-                    GetPath(customer.GoingHome());
+                    GetPath(customer.GetNextStop());
                 }
                 break;
             case 6:

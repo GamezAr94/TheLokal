@@ -18,9 +18,9 @@ public class Customer : MonoBehaviour, CustomerBehavior
     private bool isDoingALine = false;
 
     [SerializeField]
-    private float timeOrdering = 3f;
+    private float timeOrdering;
     [SerializeField]
-    private float timeWaiting = 3f;
+    private float timeWaiting;
 
     private PositionsObjects emptyChairsScript;
     private GameObject chairSpot;
@@ -35,6 +35,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     public bool IsDoingALine { get => isDoingALine;}
     public bool NextInLine { get => nextInLine; set => nextInLine = value; }
+    public GameObject ChairSpot { get => chairSpot; set => chairSpot = value; }
 
     private void Awake()
     {
@@ -101,6 +102,11 @@ public class Customer : MonoBehaviour, CustomerBehavior
         }
         else if (isBored)
         {
+            if (chairSpot != null && chairSpot.transform.position != transform.parent.position)
+            {
+                chairSpot.GetComponent<ChairsAvailability>().IsAvailable = true;
+                chairSpot = null;
+            }
             if (transform.parent.position == startPosition)
             {
                 DestroyItself();
@@ -127,6 +133,10 @@ public class Customer : MonoBehaviour, CustomerBehavior
     public void WaitingForFood()
     {
         Debug.Log("ADENTRO DEL STATE 3");
+        if (chairSpot.GetComponent<ChairsAvailability>().IsAvailable)
+        {
+            chairSpot.GetComponent<ChairsAvailability>().IsAvailable = false;
+        }
         timeWaiting -= Time.fixedDeltaTime;
         //añadir a la condicion si aun no tiene comida 
         if (timeWaiting <= 0)
@@ -144,10 +154,9 @@ public class Customer : MonoBehaviour, CustomerBehavior
     public Vector3 FindingSpot()
     {
         chairSpot = emptyChairsScript.GetAvailableChair();
-        if (chairSpot.GetComponent<ChairsAvailability>().IsAvailable && chairSpot != null)
+        if (chairSpot != null)
         {
             foundAChair = true;
-            chairSpot.GetComponent<ChairsAvailability>().IsAvailable = false;
             return chairSpot.transform.position;
         }
         else
@@ -160,7 +169,6 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     public Vector3 GoingHome()
     {
-        chairSpot.GetComponent<ChairsAvailability>().IsAvailable = true;
         return startPosition;
     }
 
