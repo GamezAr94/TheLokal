@@ -16,9 +16,6 @@ public class PositionsObjects : MonoBehaviour
         cashier = GameObject.Find("cashierPosition").transform.position;
 
         ChairsArrayList = GameObject.FindGameObjectsWithTag("Chair");
-
-
-        
     }
 
     public GameObject GetAvailableChair()

@@ -34,6 +34,7 @@ public class Astar : MonoBehaviour
     {
         Tilemap unwalkableTileMap = GetingTileMaps.Unwalkable;
 
+        //find sprites with that tag and the customer is going to avoid them
         GameObject[] obstacle = GameObject.FindGameObjectsWithTag("Obstacles");
 
         #region Initializing List with Unwalkable positions

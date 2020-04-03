@@ -6,8 +6,11 @@ public class GetingTileMaps : MonoBehaviour
     private Tilemap[] tileMaps;
     [SerializeField]
     private static Tilemap unwalkable;
+
+    private static Tilemap lineCashier;
     public Tilemap[] TileMaps { get => tileMaps; set => tileMaps = value; }
     public static Tilemap Unwalkable { get => unwalkable; set => unwalkable = value; }
+    public static Tilemap LineCashier { get => lineCashier; set => lineCashier = value; }
 
     void Awake()
     {
@@ -19,5 +22,22 @@ public class GetingTileMaps : MonoBehaviour
                 Unwalkable = t;
             }
         }
+        foreach (Tilemap t in TileMaps)
+        {
+            if (t.CompareTag("Line"))
+            {
+                LineCashier = t;
+            }
+        }
+        #region Testear la posicion de las linea
+        foreach (Vector3Int position in LineCashier.cellBounds.allPositionsWithin)
+        {
+            Vector3 positionTemp = LineCashier.CellToWorld(position);
+            if (LineCashier.GetTile(position))
+            {
+                Debug.Log("Posicion de la linea " + positionTemp);
+            }
+        }
+        #endregion
     }
 }
