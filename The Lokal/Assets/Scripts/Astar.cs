@@ -120,7 +120,6 @@ public class Astar : MonoBehaviour
         for (int i = 0; i < neighbors.Count; i++)
         {
             Node neighbor = neighbors[i];
-            
             if (!ConnectedDiagonally(current, neighbor))
             {
                 continue;
@@ -149,7 +148,17 @@ public class Astar : MonoBehaviour
 
         neighbor.G = parent.G + cost;
 
-        neighbor.H = ((Math.Abs((neighbor.Position.x - goalPos.x)) + Math.Abs((neighbor.Position.y - goalPos.y))) * 10);
+        #region  Euclidean Distance
+        //neighbor.H = ((Math.Abs((neighbor.Position.x - goalPos.x)) + Math.Abs((neighbor.Position.y - goalPos.y))) * 10);
+        #endregion
+
+        #region  Euclidean Distance
+        //neighbor.H = (float)Math.Sqrt(((neighbor.Position.x - goalPos.x) * 2 + (neighbor.Position.y - goalPos.y) * 2) * 10);
+        #endregion
+
+        #region  Diagonal Distance
+        neighbor.H = (Math.Max(   (Math.Abs(neighbor.Position.x - goalPos.x)), (Math.Abs(neighbor.Position.y - goalPos.y)))) * 10;
+        #endregion
 
         neighbor.F = neighbor.G + neighbor.H;
 
@@ -198,9 +207,6 @@ public class Astar : MonoBehaviour
     }
     
 
-
-    
-    //Avoid Walk in Diagonall
     private bool ConnectedDiagonally(Node currentNode, Node neighbor)
     {
         Vector3Int direct = currentNode.Position - neighbor.Position;

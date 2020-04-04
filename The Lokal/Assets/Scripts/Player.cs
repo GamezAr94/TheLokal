@@ -104,9 +104,15 @@ public class Player : MonoBehaviour
             float distance = Vector2.Distance(destination, transform.parent.position);
             if (distance <= 0f)
             {
-                if (path.Count > 0)
+                if (path.Count > 1)
                 {
                     destination = path.Pop();
+                }
+                else if(path.Count == 1)
+                {
+                    destination = goal;
+                    Debug.Log("Caminando al goal: " + goal);
+                    path.Pop();
                 }
                 else
                 {
