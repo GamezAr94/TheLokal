@@ -120,10 +120,10 @@ public class Astar : MonoBehaviour
         for (int i = 0; i < neighbors.Count; i++)
         {
             Node neighbor = neighbors[i];
-            if (!ConnectedDiagonally(current, neighbor))
+            /*if (!ConnectedDiagonally(current, neighbor))
             {
                 continue;
-            }
+            }*/
             int gScore = (int)DetermineGScore(neighbors[i].Position, current.Position);
 
             if (openList.Contains(neighbor))
@@ -148,8 +148,8 @@ public class Astar : MonoBehaviour
 
         neighbor.G = parent.G + cost;
 
-        #region  Euclidean Distance
-        //neighbor.H = ((Math.Abs((neighbor.Position.x - goalPos.x)) + Math.Abs((neighbor.Position.y - goalPos.y))) * 10);
+        #region  Manhattan Distance
+        neighbor.H = ((Math.Abs((neighbor.Position.x - goalPos.x)) + Math.Abs((neighbor.Position.y - goalPos.y))) * 10);
         #endregion
 
         #region  Euclidean Distance
@@ -157,7 +157,7 @@ public class Astar : MonoBehaviour
         #endregion
 
         #region  Diagonal Distance
-        neighbor.H = (Math.Max(   (Math.Abs(neighbor.Position.x - goalPos.x)), (Math.Abs(neighbor.Position.y - goalPos.y)))) * 10;
+        //neighbor.H = (Math.Max(   (Math.Abs(neighbor.Position.x - goalPos.x)), (Math.Abs(neighbor.Position.y - goalPos.y)))) * 10;
         #endregion
 
         neighbor.F = neighbor.G + neighbor.H;

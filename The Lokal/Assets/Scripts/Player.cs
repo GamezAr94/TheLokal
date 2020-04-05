@@ -110,7 +110,7 @@ public class Player : MonoBehaviour
                 else if(path.Count == 1)
                 {
                     destination = goal;
-                    Debug.Log("Caminando al goal: " + goal);
+                    Debug.Log("Caminando al goal AQUIII!: " + goal);
                     path.Pop();
                 }
                 else

@@ -6,15 +6,13 @@ public class Cashier : MonoBehaviour
     private static bool isTakingAnOrder = false;
 
     private static int totalCustomers;
+
     public static bool IsTakingAnOrder { get => isTakingAnOrder; set => isTakingAnOrder = value; }
     public static int TotalCustomers { get => totalCustomers; set => totalCustomers = value; }
 
     public static List<GameObject> inLineCustomers = new List<GameObject>();
 
     public static bool isNextInLine = true;
-
-    
-    private int countingTheLine = 0;
 
     private void FixedUpdate()
     {

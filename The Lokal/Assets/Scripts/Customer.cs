@@ -6,15 +6,17 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     [SerializeField]
     private float speed;
-
     private bool hasBeenCounted = false;
 
     public bool isInTheCofe;
 
     public bool isMoving = false;
 
+
     [SerializeField]
     private Order whatOrder;
+
+
     [SerializeField]
     private bool nextInLine = true;
 
@@ -50,7 +52,6 @@ public class Customer : MonoBehaviour, CustomerBehavior
     {
         emptyChairsScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PositionsObjects>();
         startPosition = new Vector3((int)Math.Round(transform.parent.position.x), (int)Math.Round(transform.parent.position.y), 0);
-        //addingCustomersInLine();
     }
 
     public Vector3 GetNextStop()
@@ -93,7 +94,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
                 return (int)CurrentState.Line;
             }
         }
-        if (!hasOrdered && isDoingALine && LineInMotion && !isMoving)
+        if (!hasOrdered && isDoingALine && LineInMotion && !isMoving && transform.parent.position != PositionsObjects.Cashier)
         {
             return (int)CurrentState.MovingTheLine;
         }
@@ -156,7 +157,6 @@ public class Customer : MonoBehaviour, CustomerBehavior
         }
 
         return new Vector3(-1f, 0f, 0f);
-        //return new Vector3(2.8f,-5f,0);
     }
 
     public Vector3 DoingALine()
@@ -255,23 +255,21 @@ public class Customer : MonoBehaviour, CustomerBehavior
             Cashier.IsTakingAnOrder = false;
             Debug.Log(Cashier.IsTakingAnOrder);
             hasOrdered = true;
-            //Cashier.inLineCustomers.Remove(gameObject);
         }
     }
 
     public void addingCustomersInLine()
     {
         hasBeenCounted = true;
+        isMoving = false;
+        isInTheCofe = true;
         Cashier.TotalCustomers++;
-        //Cashier.inLineCustomers.Add(gameObject);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name.Equals("Entrance") && !hasBeenCounted)
         {
-            isMoving = false;
-            isInTheCofe = true;
             addingCustomersInLine();
         }
     }
