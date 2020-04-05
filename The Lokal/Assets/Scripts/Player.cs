@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
         switch (currentCustomerState)
         {
             case 0:
-                if (path == null)
+                if (!customer.isMoving)
                 {
                     GetPath(customer.GetNextStop());
                 }
@@ -70,10 +70,9 @@ public class Player : MonoBehaviour
                 }
                 break;
             case 7:
-                if (customer.LineInMotion)
+                if (customer.LineInMotion && !customer.isMoving && gameObject.transform.parent.position != customer.TheLineIsMoving() && !customer.hasOrdered)
                 {
-                    GetPath(customer.DoingALine());
-                    Cashier.lineIsInMovement = false;
+                    GetPath(customer.TheLineIsMoving());
                 }
                 break;
             default:

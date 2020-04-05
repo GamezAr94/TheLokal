@@ -7,9 +7,16 @@ public class Customer : MonoBehaviour, CustomerBehavior
     [SerializeField]
     private float speed;
 
+    private bool hasBeenCounted = false;
+
+    public bool isInTheCofe;
+
+    public bool isMoving = false;
+
     [SerializeField]
     private Order whatOrder;
-    private bool nextInLine = false;
+    [SerializeField]
+    private bool nextInLine = true;
 
     public bool LineInMotion = false;
 
@@ -35,7 +42,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
     public bool IsSitting { get => isSitting; set => isSitting = value; }
     public float TimeOrdering { get => timeOrdering; set => timeOrdering = value; }
 
-    public bool IsDoingALine { get => isDoingALine;}
+    public bool IsDoingALine { get => isDoingALine; set => isDoingALine = value; }
     public bool NextInLine { get => nextInLine; set => nextInLine = value; }
     public GameObject ChairSpot { get => chairSpot; set => chairSpot = value; }
 
@@ -43,7 +50,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
     {
         emptyChairsScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PositionsObjects>();
         startPosition = new Vector3((int)Math.Round(transform.parent.position.x), (int)Math.Round(transform.parent.position.y), 0);
-        addingCustomersInLine();
+        //addingCustomersInLine();
     }
 
     public Vector3 GetNextStop()
@@ -75,7 +82,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     public int GetCurrentState()
     {
-        if (transform.parent.position != PositionsObjects.Cashier && !hasOrdered && !LineInMotion)
+        if (transform.parent.position != PositionsObjects.Cashier && !hasOrdered && !LineInMotion && !isDoingALine)
         {
             if (nextInLine)
             {
@@ -86,11 +93,11 @@ public class Customer : MonoBehaviour, CustomerBehavior
                 return (int)CurrentState.Line;
             }
         }
-
-        else if (LineInMotion)
+        if (!hasOrdered && isDoingALine && LineInMotion && !isMoving)
         {
             return (int)CurrentState.MovingTheLine;
         }
+
 
         else if (transform.parent.position == PositionsObjects.Cashier && !hasOrdered)
         {
@@ -133,30 +140,48 @@ public class Customer : MonoBehaviour, CustomerBehavior
         return 7;
     }
 
-    public void TheLineIsMoving()
+    public Vector3 TheLineIsMoving()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f);
         LineInMotion = false;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f);
+
+        for (int i = 0; i < GetingTileMaps.positionInLine.Count && i < Cashier.inLineCustomers.Count; i++)
+        {
+            Debug.Log("Casi!");
+            if (Cashier.inLineCustomers[i].Equals(gameObject))
+            {
+                Debug.Log("Bien muchachon " + GetingTileMaps.positionInLine[i]);
+                return GetingTileMaps.positionInLine[i -1];
+            }
+        }
+
+        return new Vector3(-1f, 0f, 0f);
+        //return new Vector3(2.8f,-5f,0);
     }
 
     public Vector3 DoingALine()
     {
+        Cashier.inLineCustomers.Add(gameObject);
         isDoingALine = true;
-        LineInMotion = false;
-        for (int i = 0; i < GetingTileMaps.positionInLine.Count; i++)
+        isMoving = false;
+        for (int i = 0; i < GetingTileMaps.positionInLine.Count && i < Cashier.inLineCustomers.Count; i++)
         {
-            if (Cashier.inLineCustomers[i + 1].Equals(gameObject))
+            Debug.Log("Casi!");
+            if (Cashier.inLineCustomers[i].Equals(gameObject))
             {
+                Debug.Log("Bien");
                 return GetingTileMaps.positionInLine[i];
             }
         }
-        return new Vector3(-1, 0, 0);
+        Debug.Log("EROOOOOR");
+        return new Vector3(-1f, 0f, 0f);
     }
     public void WaitingForFood()
     {
         Debug.Log("ADENTRO DEL STATE 3");
         if (chairSpot.GetComponent<ChairsAvailability>().IsAvailable)
         {
+            isMoving = false;
             chairSpot.GetComponent<ChairsAvailability>().IsAvailable = false;
         }
         timeWaiting -= Time.fixedDeltaTime;
@@ -179,6 +204,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
         if (chairSpot != null)
         {
             foundAChair = true;
+            isMoving = true;
             return chairSpot.transform.position;
         }
         else
@@ -191,18 +217,36 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     public Vector3 GoingHome()
     {
+        isMoving = true;
         return startPosition;
     }
 
     public Vector3 ComingToCashier()
     {
-        isDoingALine = false;
-        return PositionsObjects.Cashier;
+        if (Cashier.IsTakingAnOrder && isInTheCofe)
+        {
+            nextInLine = false;
+        }
+        if (isInTheCofe)
+        {
+            isMoving = true;
+            Cashier.IsTakingAnOrder = true;
+            if (Cashier.inLineCustomers.Count > 0)
+            {
+                Cashier.inLineCustomers.Remove(gameObject);
+            }
+            return PositionsObjects.Cashier;
+        }
+        else
+        {
+            isMoving = true;
+            return new Vector3(-1f, 0f, 0f);
+        }
     }
 
     public void Ordering()
     {
-        Cashier.IsTakingAnOrder = true;
+        isMoving = false;
         Debug.Log("ADENTRO DEL STATE 1");
         timeOrdering -= Time.fixedDeltaTime;
         Debug.Log(Cashier.IsTakingAnOrder);
@@ -211,13 +255,24 @@ public class Customer : MonoBehaviour, CustomerBehavior
             Cashier.IsTakingAnOrder = false;
             Debug.Log(Cashier.IsTakingAnOrder);
             hasOrdered = true;
-            Cashier.inLineCustomers.Remove(gameObject);
+            //Cashier.inLineCustomers.Remove(gameObject);
         }
     }
 
     public void addingCustomersInLine()
     {
+        hasBeenCounted = true;
         Cashier.TotalCustomers++;
-        Cashier.inLineCustomers.Add(gameObject);
+        //Cashier.inLineCustomers.Add(gameObject);
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name.Equals("Entrance") && !hasBeenCounted)
+        {
+            isMoving = false;
+            isInTheCofe = true;
+            addingCustomersInLine();
+        }
     }
 }

@@ -42,6 +42,7 @@ public class GetingTileMaps : MonoBehaviour
                 Debug.Log("1");
             }
         }
+        Debug.Log(positionInLine.Count);
         #endregion
     }
 }
