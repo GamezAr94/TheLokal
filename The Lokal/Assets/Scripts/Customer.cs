@@ -145,13 +145,13 @@ public class Customer : MonoBehaviour, CustomerBehavior
         LineInMotion = false;
         gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f);
 
-        for (int i = 0; i < GetingTileMaps.positionInLine.Count && i < Cashier.inLineCustomers.Count; i++)
+        for (int i = 0; i < GetingTileMaps.positionInLine.Count && i < Cashier.inLineCustomers.Count-1; i++)
         {
             Debug.Log("Casi!");
-            if (Cashier.inLineCustomers[i].Equals(gameObject))
+            if (Cashier.inLineCustomers[i+1].Equals(gameObject))
             {
                 Debug.Log("Bien muchachon " + GetingTileMaps.positionInLine[i]);
-                return GetingTileMaps.positionInLine[i -1];
+                return GetingTileMaps.positionInLine[i];
             }
         }
 
@@ -173,7 +173,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
                 return GetingTileMaps.positionInLine[i];
             }
         }
-        Debug.Log("EROOOOOR");
+        Debug.Log("EROOOOOR in doing a line method");
         return new Vector3(-1f, 0f, 0f);
     }
     public void WaitingForFood()

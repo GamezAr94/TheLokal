@@ -39,10 +39,8 @@ public class GetingTileMaps : MonoBehaviour
             if (LineCashier.GetTile(position))
             {
                 positionInLine.Add(positionTemp);
-                Debug.Log("1");
             }
         }
-        Debug.Log(positionInLine.Count);
         #endregion
     }
 }
