@@ -148,7 +148,6 @@ public class Customer : MonoBehaviour, CustomerBehavior
                 return GetingTileMaps.positionInLine[i];
             }
         }
-
         return new Vector3(-1f, 0f, 0f);
     }
 
@@ -164,7 +163,6 @@ public class Customer : MonoBehaviour, CustomerBehavior
                 return GetingTileMaps.positionInLine[i];
             }
         }
-        Debug.Log("EROOOOOR in doing a line method");
         return new Vector3(-1f, 0f, 0f);
     }
     public void WaitingForFood()
@@ -205,7 +203,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
             Cashier.waitingForTable.Add(gameObject);
             Debug.Log("Total of peaople waiting for tables: " + Cashier.waitingForTable.Count);
             gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 1f, 0f);
-            return new Vector3(-2, -3, 0);
+            return new Vector3(-2, -1, 0);
         }
     }
 
@@ -276,6 +274,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
     {
         if (collision.name.Equals("Entrance") && !hasBeenCounted)
         {
+            Debug.Log(Cashier.TotalCustomers);
             addingCustomersInLine();
         }
     }

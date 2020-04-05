@@ -165,8 +165,8 @@ MonoBehaviour:
   hasOrdered: 0
   isBored: 0
   isDoingALine: 0
-  timeOrdering: 1
-  timeWaiting: 5
+  timeOrdering: 2
+  timeWaiting: 10
 --- !u!50 &1215467785600031031
 Rigidbody2D:
   serializedVersion: 4
