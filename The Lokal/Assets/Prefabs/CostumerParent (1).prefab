@@ -156,12 +156,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2.31
+  isInTheCofe: 0
+  isMoving: 0
+  waitingTable: 0
   whatOrder: 0
+  nextInLine: 1
   LineInMotion: 0
   hasOrdered: 0
   isBored: 0
-  timeOrdering: 5
-  timeWaiting: 10
+  isDoingALine: 0
+  timeOrdering: 1
+  timeWaiting: 5
 --- !u!50 &1215467785600031031
 Rigidbody2D:
   serializedVersion: 4

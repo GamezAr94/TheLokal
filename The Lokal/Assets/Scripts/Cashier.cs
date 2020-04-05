@@ -11,6 +11,7 @@ public class Cashier : MonoBehaviour
     public static int TotalCustomers { get => totalCustomers; set => totalCustomers = value; }
 
     public static List<GameObject> inLineCustomers = new List<GameObject>();
+    public static List<GameObject> waitingForTable = new List<GameObject>();
 
     public static bool isNextInLine = true;
 
@@ -19,7 +20,7 @@ public class Cashier : MonoBehaviour
         CallingNextCustomer();
         if (Input.GetMouseButtonDown(1))
         {
-            Debug.Log(inLineCustomers.Count);
+            Debug.Log("Total de costumers que han venido: " + totalCustomers);
         }
     }
     void CallingNextCustomer()

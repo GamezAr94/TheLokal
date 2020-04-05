@@ -45,20 +45,26 @@ public class Player : MonoBehaviour
                 customer.Ordering();
                 break;
             case 2:
-                if (!customer.FoundAChair)
+                if (!customer.waitingTable)
                 {
-                    GetPath(customer.GetNextStop());
+                    if (!customer.FoundAChair)
+                    {
+                        GetPath(customer.GetNextStop());
+                    }
+                    if (path == null)
+                    {
+                        if (!customer.waitingTable)
+                        {
+                            customer.IsSitting = true;
+                        }
+                    }
                 }
-                if (path == null)
-                {
-                    customer.IsSitting = true;
-                } 
                 break;
             case 3:
                 customer.WaitingForFood();
                 break;
             case 5:
-                if (path == null && !customer.ChairSpot.GetComponent<ChairsAvailability>().IsAvailable)
+                if (!customer.waitingTable && path == null && !customer.isMoving)
                 {
                     GetPath(customer.GetNextStop());
                 }
@@ -110,7 +116,6 @@ public class Player : MonoBehaviour
                 else if(path.Count == 1)
                 {
                     destination = goal;
-                    Debug.Log("Caminando al goal AQUIII!: " + goal);
                     path.Pop();
                 }
                 else

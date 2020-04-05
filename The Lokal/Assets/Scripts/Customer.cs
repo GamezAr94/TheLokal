@@ -12,6 +12,8 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     public bool isMoving = false;
 
+    public bool waitingTable;
+
 
     [SerializeField]
     private Order whatOrder;
@@ -22,10 +24,12 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     public bool LineInMotion = false;
 
+    [SerializeField]
     public bool hasOrdered = false;
     public bool isBored;
     private bool foundAChair = false;
     private bool isSitting = false;
+    [SerializeField]
     private bool isDoingALine = false;
 
     [SerializeField]
@@ -58,22 +62,18 @@ public class Customer : MonoBehaviour, CustomerBehavior
     {
         if(GetCurrentState() == 0)
         {
-            Debug.Log("ADENTRO DEL STATE 0");
             return ComingToCashier();
         }
         if(GetCurrentState() == 2)
         {
-            Debug.Log("ADENTRO DEL STATE 2");
             return FindingSpot();
         } 
         if (GetCurrentState() == 5)
         {
-            Debug.Log("ADENTRO DEL STATE 5");
             return GoingHome();
         }
         if(GetCurrentState() == 6)
         {
-            Debug.Log("ADENTRO DEL STATE 6");
             return DoingALine();
         }
         Debug.Log("Posible Bug");
@@ -104,11 +104,11 @@ public class Customer : MonoBehaviour, CustomerBehavior
         {
             return (int)CurrentState.Ordering;
         }
-        else if (hasOrdered && isSitting == false)
+        else if (hasOrdered && !isSitting)
         {
             return (int)CurrentState.FindingSpot;
         }
-        else if (hasOrdered && isSitting == true && !isBored)
+        else if (hasOrdered && isSitting && !isBored)
         {
             if (chairSpot.transform.position == transform.parent.position)
             {
@@ -118,11 +118,6 @@ public class Customer : MonoBehaviour, CustomerBehavior
         }
         else if (isBored)
         {
-            if (chairSpot != null && chairSpot.transform.position != transform.parent.position)
-            {
-                chairSpot.GetComponent<ChairsAvailability>().IsAvailable = true;
-                chairSpot = null;
-            }
             if (transform.parent.position == startPosition)
             {
                 DestroyItself();
@@ -148,10 +143,8 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
         for (int i = 0; i < GetingTileMaps.positionInLine.Count && i < Cashier.inLineCustomers.Count-1; i++)
         {
-            Debug.Log("Casi!");
             if (Cashier.inLineCustomers[i+1].Equals(gameObject))
             {
-                Debug.Log("Bien muchachon " + GetingTileMaps.positionInLine[i]);
                 return GetingTileMaps.positionInLine[i];
             }
         }
@@ -166,10 +159,8 @@ public class Customer : MonoBehaviour, CustomerBehavior
         isMoving = false;
         for (int i = 0; i < GetingTileMaps.positionInLine.Count && i < Cashier.inLineCustomers.Count; i++)
         {
-            Debug.Log("Casi!");
             if (Cashier.inLineCustomers[i].Equals(gameObject))
             {
-                Debug.Log("Bien");
                 return GetingTileMaps.positionInLine[i];
             }
         }
@@ -178,16 +169,11 @@ public class Customer : MonoBehaviour, CustomerBehavior
     }
     public void WaitingForFood()
     {
-        Debug.Log("ADENTRO DEL STATE 3");
-        if (chairSpot.GetComponent<ChairsAvailability>().IsAvailable)
-        {
-            isMoving = false;
-            chairSpot.GetComponent<ChairsAvailability>().IsAvailable = false;
-        }
         timeWaiting -= Time.fixedDeltaTime;
         //añadir a la condicion si aun no tiene comida 
         if (timeWaiting <= 0)
         {
+            isMoving = false;
             isBored = true;
         }
     }
@@ -203,20 +189,39 @@ public class Customer : MonoBehaviour, CustomerBehavior
         chairSpot = emptyChairsScript.GetAvailableChair();
         if (chairSpot != null)
         {
+            waitingTable = false;
+            isDoingALine = false;
             foundAChair = true;
-            isMoving = true;
+            isMoving = true; 
+            chairSpot.GetComponent<ChairsAvailability>().IsAvailable = false;
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f);
             return chairSpot.transform.position;
         }
         else
         {
-            //what to do if its empty;
-            Debug.Log("NADA de sillas");
-            return new Vector3(-1, 0, 0);
+            isDoingALine = true;
+            waitingTable = true;
+            isMoving = false;
+            Cashier.waitingForTable.Add(gameObject);
+            Debug.Log("Total of peaople waiting for tables: " + Cashier.waitingForTable.Count);
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 1f, 0f);
+            return new Vector3(-2, -3, 0);
         }
     }
 
     public Vector3 GoingHome()
     {
+        if (chairSpot != null)
+        {
+            chairSpot.GetComponent<ChairsAvailability>().IsAvailable = true;
+            chairSpot = null;
+        }
+        if (Cashier.waitingForTable.Count > 0)
+        {
+            Cashier.waitingForTable[0].GetComponent<Customer>().waitingTable = false;
+            Cashier.waitingForTable.RemoveAt(0);
+        }
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 1f);
         isMoving = true;
         return startPosition;
     }
@@ -247,14 +252,15 @@ public class Customer : MonoBehaviour, CustomerBehavior
     public void Ordering()
     {
         isMoving = false;
-        Debug.Log("ADENTRO DEL STATE 1");
         timeOrdering -= Time.fixedDeltaTime;
-        Debug.Log(Cashier.IsTakingAnOrder);
         if (timeOrdering <= 0)
         {
             Cashier.IsTakingAnOrder = false;
-            Debug.Log(Cashier.IsTakingAnOrder);
             hasOrdered = true;
+            if(Cashier.waitingForTable.Count > 0)
+            {
+                isDoingALine = true;
+            }
         }
     }
 
