@@ -37,7 +37,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
     [SerializeField]
     private float timeWaiting;
 
-    private PositionsObjects emptyChairsScript;
+    private PositionsObjects emptyChairsScript = PositionsObjects.GameManagerPositions;
     private GameObject chairSpot;
     private Vector3 startPosition;
 
@@ -54,8 +54,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
 
     private void Awake()
     {
-        emptyChairsScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PositionsObjects>();
-        startPosition = new Vector3((int)Math.Round(transform.parent.position.x), (int)Math.Round(transform.parent.position.y), 0);
+        startPosition = transform.parent.position;
     }
 
     public Vector3 GetNextStop()

@@ -10,7 +10,7 @@ public class InstantiateCustomers : MonoBehaviour
     private int randomPosition;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetMouseButtonDown(0) )
         {

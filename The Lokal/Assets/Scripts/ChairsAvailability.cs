@@ -7,6 +7,7 @@ public class ChairsAvailability : MonoBehaviour
     [SerializeField]
     private Vector3 thisPosition;
 
+    
     public bool IsAvailable { get => isAvailable; set => isAvailable = value; }
     public Vector3 ThisPosition { get => thisPosition; set => thisPosition = value; }
 

@@ -15,8 +15,11 @@ public class GetingTileMaps : MonoBehaviour
 
     public static List<Vector3> positionInLine = new List<Vector3>();
 
+    public static Camera mainCamera;
+
     void Awake()
     {
+        mainCamera = Camera.main;
         TileMaps = Tilemap.FindObjectsOfType<Tilemap>();
         foreach (Tilemap t in TileMaps)
         {

@@ -18,10 +18,6 @@ public class Cashier : MonoBehaviour
     private void FixedUpdate()
     {
         CallingNextCustomer();
-        if (Input.GetMouseButtonDown(1))
-        {
-            Debug.Log("Total de costumers que han venido: " + totalCustomers);
-        }
     }
     void CallingNextCustomer()
     {
@@ -31,8 +27,6 @@ public class Cashier : MonoBehaviour
             {
                 inLineCustomers[0].GetComponent<Customer>().NextInLine = true;
                 inLineCustomers[0].GetComponent<Customer>().IsDoingALine = false;
-
-                //--------------------------------
                 if (inLineCustomers.Count > 1)
                 {
                     for (int i = 1; i < inLineCustomers.Count; i++)
@@ -41,7 +35,6 @@ public class Cashier : MonoBehaviour
                         inLineCustomers[i].GetComponent<SpriteRenderer>().color = new Color(0f, 1f, 0f);
                     }
                 }
-                //--------------------------------
                 inLineCustomers[0].GetComponent<SpriteRenderer>().color = new Color(0f, 0f, 0f);
                 isNextInLine = false;
             }

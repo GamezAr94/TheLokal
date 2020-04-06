@@ -8,11 +8,13 @@ public class PositionsObjects : MonoBehaviour
 
     private static GameObject[] chairsArrayList = new GameObject[10];
     public static GameObject[] ChairsArrayList { get => chairsArrayList; set => chairsArrayList = value; }
+    public static PositionsObjects GameManagerPositions;
 
 
     //Instantiate all the fields
     private void Awake()
     {
+        GameManagerPositions = gameObject.GetComponent<PositionsObjects>();
         cashier = GameObject.Find("cashierPosition").transform.position;
 
         ChairsArrayList = GameObject.FindGameObjectsWithTag("Chair");
@@ -34,7 +36,6 @@ public class PositionsObjects : MonoBehaviour
             else
             {
                 i++;
-                //agregar que camine aleatoriamente porque no haylugares
             }
         }
         return null;

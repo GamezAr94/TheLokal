@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     private Astar astar;
 
     [SerializeField]
-    private Camera mainCamera;
+    private Camera mainCamera = GetingTileMaps.mainCamera;
 
     private Stack<Vector3> path;
 
@@ -19,14 +19,8 @@ public class Player : MonoBehaviour
     private Customer customer;
 
     int currentCustomerState;
-
-
     public Vector3 Goal { get => goal; set => goal = value; }
-    private void Awake()
-    {
-        mainCamera = Camera.main;
 
-    }
     private void Update()
     {
         currentCustomerState = customer.GetCurrentState();
