@@ -9,8 +9,6 @@ public class MovementPlayer : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    public Sprite[] directionsSprite;
-
     public SpriteRenderer spriteRenderer;
 
     Vector2 movement;
@@ -24,29 +22,45 @@ public class MovementPlayer : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-        /*
-        if (Input.GetKeyDown("up"))
-        {
-            spriteRenderer.sprite = directionsSprite[1];
-        }
-        else if (Input.GetKeyDown("down"))
-        {
-            spriteRenderer.sprite = directionsSprite[0];
-        }
-        else if (Input.GetKeyDown("left") && Input.GetKeyDown("up"))
-        {
-            spriteRenderer.sprite = directionsSprite[2];
-        }
-        */
-        while(Input.GetKeyDown("left") && Input.GetKeyDown("up"))
-        {
-            spriteRenderer.sprite = directionsSprite[1];
-        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        if (Input.GetAxisRaw("Horizontal") > 0)
+        {
+            rb.SetRotation(90);
+        }
+        else if(Input.GetAxisRaw("Horizontal") < 0)
+        {
+            rb.SetRotation(-90);
+        }
+        if (Input.GetAxisRaw("Vertical") > 0)
+        {
+            rb.SetRotation(180);
+        }
+        else if (Input.GetAxisRaw("Vertical") < 0)
+        {
+            rb.SetRotation(0);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("Tables"))
+        {
+            spriteRenderer.sortingOrder = 1;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.name.Equals("Entrance"))
+        {
+            spriteRenderer.sortingOrder = spriteRenderer.sortingOrder > 2 ? 1 : 15;
+        }
+        if (collision.tag.Equals("Tables"))
+        {
+            spriteRenderer.sortingOrder = 15;
+        }
     }
 }

@@ -6,9 +6,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Astar astar;
 
-    [SerializeField]
-    private Camera mainCamera = GetingTileMaps.mainCamera;
-
     private Stack<Vector3> path;
 
     private Vector3 destination;

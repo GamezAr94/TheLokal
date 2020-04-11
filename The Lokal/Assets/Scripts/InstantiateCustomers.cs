@@ -10,9 +10,9 @@ public class InstantiateCustomers : MonoBehaviour
     private int randomPosition;
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        if (Input.GetMouseButtonDown(0) )
+        if (Input.GetMouseButtonDown(1) )
         {
             randomPosition = Random.Range(0, 3);
             Instantiate(Customer, spawns[randomPosition], Quaternion.identity);

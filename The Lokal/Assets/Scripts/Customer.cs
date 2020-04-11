@@ -52,8 +52,10 @@ public class Customer : MonoBehaviour, CustomerBehavior
     public bool NextInLine { get => nextInLine; set => nextInLine = value; }
     public GameObject ChairSpot { get => chairSpot; set => chairSpot = value; }
 
+
     private void Awake()
     {
+        whatOrder = (Order)UnityEngine.Random.Range(1, 5);
         startPosition = transform.parent.position;
     }
 
@@ -254,6 +256,7 @@ public class Customer : MonoBehaviour, CustomerBehavior
         {
             Cashier.IsTakingAnOrder = false;
             hasOrdered = true;
+            Cashier.OrderBills(whatOrder);
             if(Cashier.waitingForTable.Count > 0)
             {
                 isDoingALine = true;
@@ -273,7 +276,6 @@ public class Customer : MonoBehaviour, CustomerBehavior
     {
         if (collision.name.Equals("Entrance") && !hasBeenCounted)
         {
-            Debug.Log(Cashier.TotalCustomers);
             addingCustomersInLine();
         }
     }

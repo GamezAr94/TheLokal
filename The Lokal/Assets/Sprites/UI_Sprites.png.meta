@@ -1,31 +1,37 @@
 fileFormatVersion: 2
-guid: 64057e30f91a54f44aa2f4a53107ca94
+guid: 97986e7b0af4c0244a56ef74e9c52c3c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1130857596452892291
-    second: Right_Wall
+      213: 5058687368900005674
+    second: Settings
   - first:
-      213: 7884954979061694879
-    second: Left_Wall
+      213: 3580463434179486111
+    second: Customer Dialog
   - first:
-      213: -2685760039823962981
-    second: Brick_Wall
+      213: 7173235945457966158
+    second: UI_Sprites_2
   - first:
-      213: -2435270507825641780
-    second: Column
+      213: 8441765019121098698
+    second: Store button
   - first:
-      213: 5573655521215667631
-    second: Glass_Right_1
+      213: -8685553693878915148
+    second: Inventory Slot
   - first:
-      213: -5150713073908825465
-    second: Glass_Right_2
+      213: -3083775886990003508
+    second: UI_Sprites_5
   - first:
-      213: 7306715627676490781
-    second: Glass_Left_1
+      213: -408679607307797740
+    second: UI_Sprites_6
   - first:
-      213: 3668892476046131164
-    second: Glass_Left_2
+      213: 8104860215575481880
+    second: Hint button
+  - first:
+      213: -2347100968813243521
+    second: UI_Sprites_8
+  - first:
+      213: 8673199633509785395
+    second: UI_Sprites_9
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -106,93 +112,29 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Right_Wall
+      name: Settings
       rect:
         serializedVersion: 2
-        x: 0
-        y: 645
-        width: 749
-        height: 648
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -374.5, y: 158}
-        - {x: -374.5, y: 124}
-        - {x: 360.5, y: -324}
-        - {x: 374.5, y: -301}
-      tessellationDetail: 0
-      bones: []
-      spriteID: cc2816178de7c3f4e8792cf4c2985762
-      internalID: -1130857596452892291
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Left_Wall
-      rect:
-        serializedVersion: 2
-        x: 777
-        y: 802
-        width: 474
-        height: 481
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -234, y: -195.5}
-        - {x: -237, y: -240.5}
-        - {x: 237, y: 44.5}
-        - {x: 237, y: 74.5}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6450841a5457ec9449178c199d8f0598
-      internalID: 7884954979061694879
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick_Wall
-      rect:
-        serializedVersion: 2
-        x: 1290
-        y: 1031
-        width: 92
-        height: 248
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -46, y: -81}
-        - {x: -46, y: -124}
-        - {x: -41, y: -124}
-        - {x: 46, y: -81}
-        - {x: 46, y: -36}
-      tessellationDetail: 0
-      bones: []
-      spriteID: c93fa68fc9ea28140ba836c2ec8ccf3b
-      internalID: -2685760039823962981
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Column
-      rect:
-        serializedVersion: 2
-        x: 1291
-        y: 816
-        width: 58
-        height: 193
+        x: 78
+        y: 590
+        width: 215
+        height: 212
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +142,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 381580eb1b897ea43a6d8408029650dc
-      internalID: -2435270507825641780
+      spriteID: f98dffd5fb655724ba2c523b76de8435
+      internalID: 5058687368900005674
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glass_Right_1
+      name: Customer Dialog
       rect:
         serializedVersion: 2
-        x: 0
-        y: 205
-        width: 380
-        height: 400
+        x: 465
+        y: 612
+        width: 262
+        height: 192
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,20 +163,167 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98919ec8b73f083409d01131e1531df8
-      internalID: 5573655521215667631
+      spriteID: 83ddc1e582da8264c8c1b0ecddfd5e6b
+      internalID: 3580463434179486111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glass_Right_2
+      name: UI_Sprites_2
       rect:
         serializedVersion: 2
-        x: 427
+        x: 818
+        y: 602
+        width: 238
+        height: 211
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27be4a3f16110ab40853f2f0b2997ba4
+      internalID: 7173235945457966158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Store button
+      rect:
+        serializedVersion: 2
+        x: 1128
+        y: 582
+        width: 245
+        height: 254
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 25, y: 25, z: 25, w: 25}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41a2beff726d0954ea652db03bd2d21e
+      internalID: 8441765019121098698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Inventory Slot
+      rect:
+        serializedVersion: 2
+        x: 1446
+        y: 591
+        width: 239
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 25, y: 25, z: 25, w: 25}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05b2ee8f7c121a34a98d77f73aeb7be6
+      internalID: -8685553693878915148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Sprites_5
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 318
+        width: 479
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9b15b873c2d29149ad8d9d0e1c1f393
+      internalID: -3083775886990003508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Sprites_6
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 310
+        width: 514
+        height: 127
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eb38ed4c8e77924ea40fb5d2c08d08c
+      internalID: -408679607307797740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hint button
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 208
+        width: 243
+        height: 253
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 25, y: 25, z: 25, w: 25}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff3f7a9eb390458498e3cc740268e77e
+      internalID: 8104860215575481880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Sprites_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 13
+        width: 604
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ba78dbb764b1064e920211d24580a19
+      internalID: -2347100968813243521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Sprites_9
+      rect:
+        serializedVersion: 2
+        x: 758
         y: 0
-        width: 286
-        height: 342
+        width: 615
+        height: 185
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,50 +331,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07a04e16877f81e438964ead7c3b43e5
-      internalID: -5150713073908825465
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glass_Left_1
-      rect:
-        serializedVersion: 2
-        x: 765
-        y: 173
-        width: 199
-        height: 276
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2c57c49c508427c499f58f9fa01a5920
-      internalID: 7306715627676490781
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glass_Left_2
-      rect:
-        serializedVersion: 2
-        x: 985
-        y: 308
-        width: 199
-        height: 276
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: be28579dc65e18744ba522cc734a84ae
-      internalID: 3668892476046131164
+      spriteID: fb562bbeac9082541a8ec1ad48afba85
+      internalID: 8673199633509785395
       vertices: []
       indices: 
       edges: []

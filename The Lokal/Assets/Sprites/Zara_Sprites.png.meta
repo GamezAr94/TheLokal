@@ -1,31 +1,25 @@
 fileFormatVersion: 2
-guid: 64057e30f91a54f44aa2f4a53107ca94
+guid: 6f08caa9890de6c41b25f43902818d00
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1130857596452892291
-    second: Right_Wall
+      213: -1382043360556748956
+    second: Zara_Sprites_0
   - first:
-      213: 7884954979061694879
-    second: Left_Wall
+      213: 8787549459381174962
+    second: Zara_Sprites_1
   - first:
-      213: -2685760039823962981
-    second: Brick_Wall
+      213: -571296596406059548
+    second: Zara_Sprites_2
   - first:
-      213: -2435270507825641780
-    second: Column
+      213: -1324033183106417861
+    second: Zara_Sprites_3
   - first:
-      213: 5573655521215667631
-    second: Glass_Right_1
+      213: 3300722510570014566
+    second: Zara_Sprites_4
   - first:
-      213: -5150713073908825465
-    second: Glass_Right_2
-  - first:
-      213: 7306715627676490781
-    second: Glass_Left_1
-  - first:
-      213: 3668892476046131164
-    second: Glass_Left_2
+      213: 4509911597964576199
+    second: Zara_Sprites_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -69,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 130
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -106,186 +100,143 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Right_Wall
+      name: Zara_Sprites_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 645
-        width: 749
-        height: 648
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -374.5, y: 158}
-        - {x: -374.5, y: 124}
-        - {x: 360.5, y: -324}
-        - {x: 374.5, y: -301}
-      tessellationDetail: 0
-      bones: []
-      spriteID: cc2816178de7c3f4e8792cf4c2985762
-      internalID: -1130857596452892291
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Left_Wall
-      rect:
-        serializedVersion: 2
-        x: 777
-        y: 802
-        width: 474
-        height: 481
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -234, y: -195.5}
-        - {x: -237, y: -240.5}
-        - {x: 237, y: 44.5}
-        - {x: 237, y: 74.5}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6450841a5457ec9449178c199d8f0598
-      internalID: 7884954979061694879
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Brick_Wall
-      rect:
-        serializedVersion: 2
-        x: 1290
-        y: 1031
-        width: 92
-        height: 248
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -46, y: -81}
-        - {x: -46, y: -124}
-        - {x: -41, y: -124}
-        - {x: 46, y: -81}
-        - {x: 46, y: -36}
-      tessellationDetail: 0
-      bones: []
-      spriteID: c93fa68fc9ea28140ba836c2ec8ccf3b
-      internalID: -2685760039823962981
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Column
-      rect:
-        serializedVersion: 2
-        x: 1291
-        y: 816
-        width: 58
-        height: 193
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 381580eb1b897ea43a6d8408029650dc
-      internalID: -2435270507825641780
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glass_Right_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 205
-        width: 380
-        height: 400
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 98919ec8b73f083409d01131e1531df8
-      internalID: 5573655521215667631
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Glass_Right_2
-      rect:
-        serializedVersion: 2
-        x: 427
         y: 0
-        width: 286
-        height: 342
+        width: 72
+        height: 177
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07a04e16877f81e438964ead7c3b43e5
-      internalID: -5150713073908825465
+      spriteID: f6b983f06e251734396eb8cf680ce378
+      internalID: -1382043360556748956
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glass_Left_1
+      name: Zara_Sprites_1
       rect:
         serializedVersion: 2
-        x: 765
-        y: 173
-        width: 199
-        height: 276
+        x: 97
+        y: 0
+        width: 67
+        height: 180
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c57c49c508427c499f58f9fa01a5920
-      internalID: 7306715627676490781
+      spriteID: 68725eacdda5aed4e83d96a901df71db
+      internalID: 8787549459381174962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Glass_Left_2
+      name: Zara_Sprites_2
       rect:
         serializedVersion: 2
-        x: 985
-        y: 308
-        width: 199
-        height: 276
+        x: 181
+        y: 0
+        width: 61
+        height: 177
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be28579dc65e18744ba522cc734a84ae
-      internalID: 3668892476046131164
+      spriteID: 8490528faec98564f9ebca46e3e104e6
+      internalID: -571296596406059548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zara_Sprites_3
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 0
+        width: 67
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5adcd27af3a98cc42a43942a1986ca0d
+      internalID: -1324033183106417861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zara_Sprites_4
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 0
+        width: 73
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cb006d37f2c822468a1d02f4f1e98e9
+      internalID: 3300722510570014566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zara_Sprites_5
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 0
+        width: 63
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 790f79abbf9202b4596b7c79317a6ea3
+      internalID: 4509911597964576199
       vertices: []
       indices: 
       edges: []
