@@ -25,6 +25,7 @@ public class Cashier : MonoBehaviour
     public static List<GameObject> waitingForTable = new List<GameObject>();
 
     public static bool isNextInLine = true;
+    public static PositionDrinks current;
     private void Update()
     {
         if (orderBills.Count > 0)
@@ -72,7 +73,7 @@ public class Cashier : MonoBehaviour
     IEnumerator startOrder()
     {
         startOtherCoffe = false;
-        PositionDrinks current = GetPositionNextDrink();
+        current = GetPositionNextDrink();
         if (current != null)
         {
             Debug.Log("Empezando el cafe " + orderBills[0]);

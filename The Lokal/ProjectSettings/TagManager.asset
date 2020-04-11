@@ -11,6 +11,8 @@ TagManager:
   - UnwalkableTilemap
   - GameManager
   - Line
+  - water
+  - Drink
   layers:
   - Default
   - TransparentFX
