@@ -14,39 +14,67 @@ public class UIInventory : MonoBehaviour
     static bool full = false;
     public static UIInventory thisUIInventory;
 
-    static List<SpriteRenderer> listOrders = new List<SpriteRenderer>();
+    static Sprite orderSprite = null;
     private void Awake()
     {
         thisUIInventory = gameObject.GetComponent<UIInventory>();
     }
     private void Update()
     {
-        if(listOrders.Count > 0 && listOrders.Count <= 5 && newOrder)
+        //if(listOrders.Count > 0 && listOrders.Count <= 5 && newOrder)
+        if(newOrder && !UIisEmpty())
         {
             int i = GetEmptySlot();
             newOrder = false;
             inventoryPanels[i].enabled = true;
             inventorySlots[i].enabled = true;
             inventorySlots[i].GetComponent<Button>().enabled = true;
-            inventorySlots[i].sprite = drinksSprites[0];
+            inventorySlots[i].sprite = orderSprite;
+            orderSprite = null;
+        }
+    } 
+
+    public static void addOrder(Sprite ord)
+    {
+        if (orderSprite == null)
+        {
+            newOrder = true;
+            Debug.Log(ord.ToString());
+            orderSprite = ord;
+        }
+        else
+        {
+            //What to do if you can not grab any more coffe
         }
     }
-
-    public static void addOrder(SpriteRenderer ord)
+    public bool UIisEmpty()
     {
-        newOrder = true;
-        listOrders.Add(ord);
+        for(int i = 0; i < inventoryPanels.Length; i++)
+        {
+            if(inventoryPanels[i] == null)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int GetEmptySlot()
     {
-        for(int i = 0; i < inventoryPanels.Length; i++)
+        if (UIisEmpty())
         {
-            if (inventorySlots[i].sprite == null)
-            {
-                return i;
-            }
+            return -1;
         }
-        return -1;
+        else
+        {
+            for (int i = 0; i < inventoryPanels.Length; i++)
+            {
+                if (inventorySlots[i].sprite == null)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
     }
 }

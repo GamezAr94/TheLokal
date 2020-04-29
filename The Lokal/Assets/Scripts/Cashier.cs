@@ -77,8 +77,9 @@ public class Cashier : MonoBehaviour
         if (current != null)
         {
             Debug.Log("Empezando el cafe " + orderBills[0]);
+            int order = (int)orderBills[0];
             yield return new WaitForSeconds(3);
-            Instantiate(drinks[0], current.PositionToPutADrink, Quaternion.identity);
+            Instantiate(drinks[order-1], current.PositionToPutADrink, Quaternion.identity);
             current.IsAvailable = false;
             Debug.Log("Terminando el cafe " + orderBills[0]);
             orderBills.Remove(orderBills[0]);

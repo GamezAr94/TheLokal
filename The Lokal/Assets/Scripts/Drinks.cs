@@ -9,6 +9,8 @@ public class Drinks : MonoBehaviour
     SpriteRenderer thisGameObject;
     [SerializeField]
     private Order whatKindOfDrink;
+    [SerializeField]
+    Sprite spriteOrder;
     PositionDrinks InitialPosition;
 
     private void Awake()
@@ -21,7 +23,7 @@ public class Drinks : MonoBehaviour
     {
         if (Input.GetKeyDown("space") && isTrigger && UIInventory.thisUIInventory.GetEmptySlot() >= 0)
         {
-            UIInventory.addOrder(thisGameObject);
+            UIInventory.addOrder(spriteOrder);
             InitialPosition.IsAvailable = true;
             Destroy(this.gameObject);
         }
