@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8339044601255889851}
   m_Layer: 0
   m_Name: Latte
-  m_TagString: Untagged
+  m_TagString: Drink
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,6 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whatKindOfDrink: 3
+  spriteOrder: {fileID: 4296747569617802584, guid: 8c5f4395518e2a84492757a723130952,
+    type: 3}
+  isGrabable: 0
 --- !u!61 &8339044601255889851
 BoxCollider2D:
   m_ObjectHideFlags: 0

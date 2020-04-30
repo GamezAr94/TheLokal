@@ -12,6 +12,7 @@ public class Drinks : MonoBehaviour
     [SerializeField]
     Sprite spriteOrder;
     PositionDrinks InitialPosition;
+    public bool isGrabable;
 
     private void Awake()
     {
@@ -21,27 +22,20 @@ public class Drinks : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown("space") && isTrigger && UIInventory.thisUIInventory.GetEmptySlot() >= 0)
+        if (Input.GetKeyDown("space") && isGrabable && UIInventory.thisUIInventory.GetEmptySlot() >= 0)
         {
+            isGrabable = true;
             UIInventory.addOrder(spriteOrder);
             InitialPosition.IsAvailable = true;
             Destroy(this.gameObject);
         }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag.Equals("Player") && !isServed)
+        if (isGrabable)
         {
-            isTrigger = true;
             thisGameObject.color = new Color(1, 1, 1, 1f);
         }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag.Equals("Player") && !isServed)
+        else
         {
-            isTrigger = false;
-            thisGameObject.color = new Color(1, 1, 1, 0.3f);
+            thisGameObject.color = new Color(1, 1, 1, .4f);
         }
     }
 }
