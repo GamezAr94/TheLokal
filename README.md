@@ -40,7 +40,7 @@ Implementation of A* path finding algorithm into a coffee shop game.
 > Customers doing a line to order a coffee
 ![alt text](https://github.com/GamezAr94/TheLokal/blob/master/The%20Lokal/Assets/Sprites/theLokal_customer_line.png)
 
-> The coffees taken by the player will be displayed in the UI.
+> The coffees taken by the player will be displayed in the UI. customer leaving after few seconds of being in the chair (*Blue Circle*)
 ![alt text](https://github.com/GamezAr94/TheLokal/blob/master/The%20Lokal/Assets/Sprites/theLokal_customer_grabing_coffees.png)
 
 ## Assets Creaated for this proyect 
@@ -53,9 +53,10 @@ Implementation of A* path finding algorithm into a coffee shop game.
 > Cashier
 ![alt text](https://github.com/GamezAr94/TheLokal/blob/master/The%20Lokal/Assets/Sprites/Zara_Sprites.png)
 
-## Notes
+## IMPORTANT
 ```
-The game isn't finished, the player can leaves the drinks 
+The game isn't finished, the player can leaves the drinks and there is not many sprites in the game such as chairs and UI
 game performance is slow, ***THIS GAME IS MEANT TO BE AN EXPERIMENT TO IMPLEMENT A PATH FINDING ALGORITHM*** and that goal was successfully achieved 
 this algorithm is slow because it compares almost every cell, the algorithm will compare all cells at runtime every time a customer is created.
+***More features will be added to this game in the future***
 ```
